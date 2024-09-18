@@ -8,24 +8,27 @@ using System.Globalization;
 //string inputFile = @"~\files\customers-1000.csv";
 //string outputFile = @"~\files\filtered-customers.csv";
 
-string inputFile = @"C:\Users\jimmy\source\repos\IntroToCsvHelper\CsvDemo\files\customers-100.csv";
-string outputFile = @"C:\Users\jimmy\source\repos\IntroToCsvHelper\CsvDemo\files\filtered-customers.csv";
+//string inputFile = @"C:\Users\jimmy\source\repos\IntroToCsvHelper\CsvDemo\files\customers-100.csv";
+//string outputFile = @"C:\Users\jimmy\source\repos\IntroToCsvHelper\CsvDemo\files\filtered-customers.csv";
+string inputFile = @"C:\Users\jimmy\source\repos\IntroToCsvHelper\CsvDemo\files\organizations-100000.csv";
+string outputFile = @"C:\Users\jimmy\source\repos\IntroToCsvHelper\CsvDemo\files\filtered-organizations.csv";
 
-List<CustomerModel> outputRecords = new();
+//List<CustomerModel> outputRecords = new();
+List<OrganizationModel> outputRecords = new();
 
 using var reader = new StreamReader(inputFile);
 using var csv = new CsvReader(reader, CultureInfo.InvariantCulture);
 int i = 0;
 
-var records = csv.GetRecords<CustomerModel>();
+var records = csv.GetRecords<OrganizationModel>();
 
 foreach (var record in records)
 {
-    if (record.FirstName.StartsWith("S"))
+    if (record.Name.Contains('-'))
     {
         outputRecords.Add(record);
     }
-    Console.WriteLine(record.FirstName + " " + record.LastName);
+    Console.WriteLine(record.Index + " " + record.Name);
     i++;
 }
 
